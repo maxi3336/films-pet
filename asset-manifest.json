@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/films-pet/static/css/main.6d75d3ec.chunk.css",
+    "main.js": "/films-pet/static/js/main.2c1d4053.chunk.js",
+    "main.js.map": "/films-pet/static/js/main.2c1d4053.chunk.js.map",
+    "runtime-main.js": "/films-pet/static/js/runtime-main.9c866420.js",
+    "runtime-main.js.map": "/films-pet/static/js/runtime-main.9c866420.js.map",
+    "static/css/2.ab75b8d7.chunk.css": "/films-pet/static/css/2.ab75b8d7.chunk.css",
+    "static/js/2.369ec44e.chunk.js": "/films-pet/static/js/2.369ec44e.chunk.js",
+    "static/js/2.369ec44e.chunk.js.map": "/films-pet/static/js/2.369ec44e.chunk.js.map",
+    "index.html": "/films-pet/index.html",
+    "static/css/2.ab75b8d7.chunk.css.map": "/films-pet/static/css/2.ab75b8d7.chunk.css.map",
+    "static/css/main.6d75d3ec.chunk.css.map": "/films-pet/static/css/main.6d75d3ec.chunk.css.map",
+    "static/js/2.369ec44e.chunk.js.LICENSE.txt": "/films-pet/static/js/2.369ec44e.chunk.js.LICENSE.txt",
+    "static/media/root.css": "/films-pet/static/media/Roboto-Regular.a8d6ac03.ttf",
+    "static/media/arrow-right.bd27ae48.svg": "/films-pet/static/media/arrow-right.bd27ae48.svg",
+    "static/media/close.da5c4222.svg": "/films-pet/static/media/close.da5c4222.svg",
+    "static/media/search.28b0ad10.svg": "/films-pet/static/media/search.28b0ad10.svg",
+    "static/media/tap.a07ceac6.svg": "/films-pet/static/media/tap.a07ceac6.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9c866420.js",
+    "static/css/2.ab75b8d7.chunk.css",
+    "static/js/2.369ec44e.chunk.js",
+    "static/css/main.6d75d3ec.chunk.css",
+    "static/js/main.2c1d4053.chunk.js"
+  ]
+}
