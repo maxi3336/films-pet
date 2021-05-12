@@ -1,0 +1,19 @@
+import axios from "axios";
+import { MAIN_IMAGE_URL, MOVIE, MOVIE_POPULAR } from "./urls";
+
+const API_KEY = "8d58f8833b1cb04a9b53bcfcdc797756";
+const baseQueries = `api_key=${API_KEY}&language=ru`;
+
+export const getPosterByPath = (poster_path) => {
+  return `${MAIN_IMAGE_URL}/${poster_path}`;
+};
+
+export const getMovieById = async (movieId) => {
+  const { data } = await axios.get(`${MOVIE}/${movieId}?${baseQueries}`);
+  return data;
+};
+
+export const getPopularMovies = async () => {
+  const { data } = await axios.get(`${MOVIE_POPULAR}?${baseQueries}`);
+  return data.results;
+};
