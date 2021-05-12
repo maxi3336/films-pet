@@ -1,5 +1,7 @@
+import Empty from "../components/Secondary/Empty";
+
 const WatchLater = () => {
-  return <h1>WatchLater</h1>;
+  return <Empty />;
 };
 
 export default WatchLater;

@@ -1,5 +1,7 @@
+import Empty from "../components/Secondary/Empty";
+
 const Favorites = () => {
-  return <h1>Favorites</h1>;
+  return <Empty />;
 };
 
 export default Favorites;

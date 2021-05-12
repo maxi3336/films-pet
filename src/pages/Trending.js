@@ -1,5 +1,7 @@
+import Empty from "../components/Secondary/Empty";
+
 const Trending = () => {
-  return <h1>Trending</h1>;
+  return <Empty />;
 };
 
 export default Trending;

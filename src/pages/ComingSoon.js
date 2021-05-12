@@ -1,5 +1,7 @@
+import Empty from "../components/Secondary/Empty";
+
 const ComingSoon = () => {
-  return <h1>Coming Soon</h1>;
+  return <Empty />;
 };
 
 export default ComingSoon;
