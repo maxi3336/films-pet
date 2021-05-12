@@ -1,5 +1,11 @@
 import axios from "axios";
-import { MAIN_IMAGE_URL, MOVIE, MOVIE_POPULAR } from "./urls";
+import {
+  MAIN_IMAGE_URL,
+  MOVIE,
+  MOVIE_POPULAR,
+  MOVIE_UPCOMING,
+  GENRES_MOVIE,
+} from "./urls";
 
 const API_KEY = "8d58f8833b1cb04a9b53bcfcdc797756";
 const baseQueries = `api_key=${API_KEY}&language=ru`;
@@ -16,4 +22,14 @@ export const getMovieById = async (movieId) => {
 export const getPopularMovies = async () => {
   const { data } = await axios.get(`${MOVIE_POPULAR}?${baseQueries}`);
   return data.results;
+};
+
+export const getUpcomingMovies = async () => {
+  const { data } = await axios.get(`${MOVIE_UPCOMING}?${baseQueries}`);
+  return data.results;
+};
+
+export const getGenres = async () => {
+  const { data } = await axios.get(`${GENRES_MOVIE}?${baseQueries}`);
+  return data;
 };

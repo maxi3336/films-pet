@@ -1,4 +1,4 @@
-import Releases from "../../pages/Releases";
+import Releases from "../../pages/Releases/Releases";
 import Trending from "../../pages/Trending";
 import ComingSoon from "../../pages/ComingSoon";
 import Favorites from "../../pages/Favorites";
@@ -8,7 +8,7 @@ export const routesList = [
   {
     path: "/releases",
     Component: Releases,
-    title: "New Releases",
+    title: "Последние релизы",
   },
   {
     path: "/trending",

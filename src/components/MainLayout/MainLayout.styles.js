@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const MainStyled = styled.div`
   flex: 1;
 
+  overflow: hidden;
   display: flex;
 `;
 
