@@ -11,9 +11,9 @@ import {
 import { MAIN_IMAGE_URL } from "../../api/urls";
 import { ReactComponent as HandIcon } from "../../assets/icons/tap.svg";
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, ...props }) => {
   return (
-    <MovieStyled className="movie">
+    <MovieStyled className="movie" {...props}>
       <Rating className="movie__rating">{movie.vote_average}</Rating>
       <Poster className="movie__poster">
         <img src={`${MAIN_IMAGE_URL}/${movie.poster_path}`} alt="Poster" />

@@ -13,7 +13,7 @@ export const routesList = [
   {
     path: "/trending",
     Component: Trending,
-    title: "Trending",
+    title: "В тренде",
   },
   {
     path: "/coming",
@@ -23,11 +23,11 @@ export const routesList = [
   {
     path: "/favorites",
     Component: Favorites,
-    title: "Favorites",
+    title: "Избранные",
   },
   {
     path: "/watch-later",
     Component: WatchLater,
-    title: "Watch Later",
+    title: "Посмотреть позже",
   },
 ];
