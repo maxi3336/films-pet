@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { useSelector } from "react-redux";
-import { getGenres, getPopularMovies } from "../api/TMDB";
+import { getPopularMovies } from "../api/TMDB";
 import MovieModal from "../components/Modals/MovieModal/MovieModal";
 import Movie from "../components/Movie/Movie";
 import Empty from "../components/Secondary/Empty";
@@ -11,20 +11,32 @@ import {
   ReleasesListContainer,
   ReleasesList,
   Title,
+  Pages,
+  Page,
 } from "./Releases/Releases.styles";
 
 const Trending = () => {
   const [movies, setMovies] = useState();
+  const [pages, setPages] = useState();
+  const [currentPage, setCurrentPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [movieModal, setMovieModal] = useState();
-
   const { genres } = useSelector((state) => state.movies);
 
   useEffect(() => {
     const updateMovies = async () => {
       setIsLoading(true);
 
-      const _movies = await getPopularMovies();
+      const result = await getPopularMovies();
+
+      const _pages = [];
+      for (let i = 1; i <= result.total_pages; i++) {
+        _pages.push(i);
+      }
+      setPages(_pages);
+      setCurrentPage(result.current_page);
+
+      const _movies = result.movies;
 
       const moviesWithGenres = _movies?.map((movie) => {
         const _genres = genres.filter((genre) =>
@@ -40,14 +52,37 @@ const Trending = () => {
     };
 
     !movies && genres && updateMovies();
+    !movies && !genres && setIsLoading(true);
   }, [movies, genres]);
+
+  const switchPageHandler = async (pageNum) => {
+    setIsLoading(true);
+
+    setCurrentPage(pageNum);
+
+    const result = await getPopularMovies(pageNum);
+
+    const _movies = result.movies;
+
+    const moviesWithGenres = _movies?.map((movie) => {
+      const _genres = genres.filter((genre) =>
+        movie.genre_ids.includes(genre.id)
+      );
+
+      return { ...movie, genres: _genres.map(({ name }) => name) };
+    });
+
+    setIsLoading(false);
+
+    setMovies(moviesWithGenres);
+  };
 
   return (
     <ReleasesStyled>
       <Title>
         <h1>В тренде</h1>
       </Title>
-      {!movies && isLoading ? (
+      {!movies || isLoading ? (
         <PageLoader />
       ) : movies?.length && !isLoading ? (
         <ReleasesListContainer>
@@ -66,6 +101,19 @@ const Trending = () => {
       ) : (
         <Empty />
       )}
+      {pages && currentPage ? (
+        <Pages>
+          {pages?.map((page) => (
+            <Page
+              onClick={() => switchPageHandler(page)}
+              isActive={page === currentPage}
+            >
+              {page}
+            </Page>
+          ))}
+        </Pages>
+      ) : null}
+
       {movieModal ? (
         <MovieModal movie={movieModal} close={() => setMovieModal()} />
       ) : null}

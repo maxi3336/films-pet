@@ -24,9 +24,15 @@ export const getPopularMovies = async () => {
   return data.results;
 };
 
-export const getUpcomingMovies = async () => {
-  const { data } = await axios.get(`${MOVIE_UPCOMING}?${baseQueries}`);
-  return data.results;
+export const getUpcomingMovies = async (page = 1) => {
+  const { data } = await axios.get(
+    `${MOVIE_UPCOMING}?${baseQueries}&page=${page}`
+  );
+  return {
+    movies: data.results,
+    total_pages: data.total_pages,
+    current_page: data.page,
+  };
 };
 
 export const getGenres = async () => {

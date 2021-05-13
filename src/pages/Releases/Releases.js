@@ -11,10 +11,14 @@ import {
   ReleasesListContainer,
   ReleasesList,
   Title,
+  Pages,
+  Page,
 } from "./Releases.styles";
 
 const Releases = () => {
   const [movies, setMovies] = useState();
+  const [pages, setPages] = useState();
+  const [currentPage, setCurrentPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [movieModal, setMovieModal] = useState();
 
@@ -24,7 +28,16 @@ const Releases = () => {
     const updateMovies = async () => {
       setIsLoading(true);
 
-      const _movies = await getUpcomingMovies();
+      const result = await getUpcomingMovies();
+
+      const _pages = [];
+      for (let i = 1; i <= result.total_pages; i++) {
+        _pages.push(i);
+      }
+      setPages(_pages);
+      setCurrentPage(result.current_page);
+
+      const _movies = result.movies;
 
       const moviesWithGenres = _movies?.map((movie) => {
         const _genres = genres.filter((genre) =>
@@ -40,14 +53,37 @@ const Releases = () => {
     };
 
     !movies && genres && updateMovies();
+    !movies && !genres && setIsLoading(true);
   }, [movies, genres]);
+
+  const switchPageHandler = async (pageNum) => {
+    setIsLoading(true);
+
+    setCurrentPage(pageNum);
+
+    const result = await getUpcomingMovies(pageNum);
+
+    const _movies = result.movies;
+
+    const moviesWithGenres = _movies?.map((movie) => {
+      const _genres = genres.filter((genre) =>
+        movie.genre_ids.includes(genre.id)
+      );
+
+      return { ...movie, genres: _genres.map(({ name }) => name) };
+    });
+
+    setIsLoading(false);
+
+    setMovies(moviesWithGenres);
+  };
 
   return (
     <ReleasesStyled>
       <Title>
         <h1>Последние релизы</h1>
       </Title>
-      {!movies && isLoading ? (
+      {!movies || isLoading ? (
         <PageLoader />
       ) : movies?.length && !isLoading ? (
         <ReleasesListContainer>
@@ -66,6 +102,19 @@ const Releases = () => {
       ) : (
         <Empty />
       )}
+      {pages && currentPage ? (
+        <Pages>
+          {pages?.map((page) => (
+            <Page
+              onClick={() => switchPageHandler(page)}
+              isActive={page === currentPage}
+            >
+              {page}
+            </Page>
+          ))}
+        </Pages>
+      ) : null}
+
       {movieModal ? (
         <MovieModal movie={movieModal} close={() => setMovieModal()} />
       ) : null}

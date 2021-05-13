@@ -32,3 +32,27 @@ export const Title = styled.div`
   font-size: 28px;
   color: #f5f5f4;
 `;
+
+export const Pages = styled.div`
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+`;
+
+export const Page = styled.span`
+  padding: 5px;
+
+  cursor: pointer;
+
+  color: ${({ isActive }) => (isActive ? "#7BC1FF" : "#E2E2E2")};
+
+  pointer-events: ${({ isActive }) => (!isActive ? "auto" : "none")};
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
