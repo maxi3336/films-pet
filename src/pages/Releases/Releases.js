@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { useSelector } from "react-redux";
-import { getGenres, getUpcomingMovies } from "../../api/TMDB";
+import { getUpcomingMovies } from "../../api/TMDB";
 import MovieModal from "../../components/Modals/MovieModal/MovieModal";
 import Movie from "../../components/Movie/Movie";
 import Empty from "../../components/Secondary/Empty";

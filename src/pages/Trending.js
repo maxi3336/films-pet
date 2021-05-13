@@ -31,7 +31,7 @@ const Trending = () => {
 
       const _pages = [];
       for (let i = 1; i <= result.total_pages; i++) {
-        _pages.push(i);
+        if (i <= 10) _pages.push(i);
       }
       setPages(_pages);
       setCurrentPage(result.current_page);

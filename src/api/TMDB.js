@@ -19,9 +19,15 @@ export const getMovieById = async (movieId) => {
   return data;
 };
 
-export const getPopularMovies = async () => {
-  const { data } = await axios.get(`${MOVIE_POPULAR}?${baseQueries}`);
-  return data.results;
+export const getPopularMovies = async (page = 1) => {
+  const { data } = await axios.get(
+    `${MOVIE_POPULAR}?${baseQueries}&page=${page}`
+  );
+  return {
+    movies: data.results,
+    total_pages: data.total_pages,
+    current_page: data.page,
+  };
 };
 
 export const getUpcomingMovies = async (page = 1) => {
