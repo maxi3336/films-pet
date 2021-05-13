@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
+import { useSelector } from "react-redux";
 import { getGenres, getUpcomingMovies } from "../../api/TMDB";
 import MovieModal from "../../components/Modals/MovieModal/MovieModal";
 import Movie from "../../components/Movie/Movie";
@@ -17,19 +18,20 @@ const Releases = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [movieModal, setMovieModal] = useState();
 
+  const { genres } = useSelector((state) => state.movies);
+
   useEffect(() => {
     const updateMovies = async () => {
       setIsLoading(true);
 
       const _movies = await getUpcomingMovies();
-      const _genres = await getGenres();
 
       const moviesWithGenres = _movies?.map((movie) => {
-        const genres = _genres.genres.filter((genre) =>
+        const _genres = genres.filter((genre) =>
           movie.genre_ids.includes(genre.id)
         );
 
-        return { ...movie, genres: genres.map(({ name }) => name) };
+        return { ...movie, genres: _genres.map(({ name }) => name) };
       });
 
       setIsLoading(false);
@@ -37,8 +39,8 @@ const Releases = () => {
       setMovies(moviesWithGenres);
     };
 
-    !movies && updateMovies();
-  }, [movies]);
+    !movies && genres && updateMovies();
+  }, [movies, genres]);
 
   return (
     <ReleasesStyled>
